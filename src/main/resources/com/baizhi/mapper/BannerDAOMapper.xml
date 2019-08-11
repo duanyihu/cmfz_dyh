@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.BannerDAO">
+    <!--添加轮播图-->
+    <insert id="insert"  parameterType="Banner" >
+        insert into t_banner values (#{id},#{title},#{imgpath},#{description},#{status},#{up_date})
+    </insert>
+
+    <!--删除一个轮播图-->
+    <delete id="delete" >
+        delete from t_banner where id=#{id}
+    </delete>
+
+    <!--修改一个轮播图-->
+    <update id="update">
+        update t_banner
+        <set>
+            <if test="title!= null">title=#{title},</if>
+            <if test="imgpath!=null">imgpath=#{imgpath},</if>
+            <if test="description!=null">description=#{description},</if>
+            <if test="status!=null">status=#{status},</if>
+            <if test="up_date!=null">up_date=#{up_date}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--查询总条数-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from t_banner
+    </select>
+
+    <!--分页-->
+    <select id="selelctAllBann" resultType="Banner">
+        select * from t_banner limit  #{start},#{rows}
+    </select>
+</mapper>

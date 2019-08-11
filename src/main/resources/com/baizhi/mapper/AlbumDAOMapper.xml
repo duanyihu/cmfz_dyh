@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.AlbumDAO">
+    <!--添加专辑-->
+    <insert id="insert"  parameterType="Album" >
+        insert into album values (#{id},#{title},#{score},#{author},#{broadcast},#{count},#{content},#{cover_img},#{pub_date})
+    </insert>
+    <!--删除一个专辑-->
+    <delete id="delete" >
+        delete from album where id=#{id}
+    </delete>
+
+    <!--修改一个专辑-->
+    <update id="update">
+        update album
+        <set>
+            <if test="title!= null">title=#{title},</if>
+            <if test="score!=null">score=#{score},</if>
+            <if test="author!=null">author=#{author},</if>
+            <if test="broadcast!=null">broadcast=#{broadcast},</if>
+            <if test="count!=null">count=#{count},</if>
+            <if test="content!=null">content=#{content},</if>
+            <if test="cover_img!=null">cover_img=#{cover_img},</if>
+            <if test="pub_date!=null">pub_date=#{pub_date}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--查询总条数-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from album
+    </select>
+
+    <!--分页-->
+    <select id="selectPage" resultType="Album">
+        select * from album limit  #{start},#{rows}
+    </select>
+    <!--通过id查询一张专辑-->
+    <select id="selectOneAlbum" resultType="Album">
+        select * from album where id=#{id}
+
+    </select>
+
+
+</mapper>

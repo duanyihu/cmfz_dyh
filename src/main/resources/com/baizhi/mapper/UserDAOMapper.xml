@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.UserDAO">
+
+
+    <insert id="insert" parameterType="User">
+       insert into t_user values (#{id},#{phone},#{password},#{salt},#{pic_img},#{ahama},#{name},
+                                    #{sex},#{city},#{sign},#{status},#{reg_date},#{guruId})
+    </insert>
+
+    <delete id="delete" >
+        delete  from t_user where id = #{id}
+    </delete>
+    <!--修改用户状态-->
+    <update id="update" >
+        update t_user
+        <set>
+            <if test="phone!=null">phone=#{phone},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="salt!=null">salt=#{salt},</if>
+            <if test="pic_img!=null">pic_img=#{pic_img},</if>
+            <if test="ahama!=null">ahama=#{ahama},</if>
+            <if test="name!=null">name=#{name},</if>
+            <if test="sex!=null">sex=#{sex},</if>
+            <if test="city!=null">city=#{city},</if>
+            <if test="sign!=null">sign=#{sign},</if>
+            <if test="status!=null">status=#{status},</if>
+            <if test="reg_date!=null">reg_date=#{reg_date},</if>
+            <if test="guruId!=null">guruId=#{guruId}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--查询总条数-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from t_user
+    </select>
+
+    <!--分页-->
+    <select id="selectAll" resultType="User">
+        select * from t_user  limit  #{start},#{rows}
+    </select>
+
+    <!--查询所有的用户信息-->
+    <select id="selectUsers" resultType="User">
+       select * from t_user
+    </select>
+
+    <!--用户统计-->
+    <select id="selectDate" resultType="Date">
+         select reg_date from t_user
+    </select>
+    <select id="selectDateBySex" resultType="Date">
+        select reg_date from t_user where sex=#{sex}
+    </select>
+
+    <!--地图分布-->
+    <select id="selectCity" resultType="String">
+         select city from t_user
+    </select>
+    <select id="selectCities" resultType="String">
+        select city from t_user where sex=#{sex}
+    </select>
+
+
+
+
+</mapper>
