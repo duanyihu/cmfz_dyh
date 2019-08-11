@@ -10,6 +10,8 @@
     </parent>
     <groupId>com.baizhi</groupId>
     <artifactId>cmfz_dyh</artifactId>
+         
+         <!--持名法州版本1.0 -->
     <version>0.0.1-SNAPSHOT</version>
     <name>cmfz_dyh</name>
     <description>Demo project for Spring Boot</description>
